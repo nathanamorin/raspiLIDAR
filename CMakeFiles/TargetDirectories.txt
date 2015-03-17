@@ -1,1 +1,0 @@
-/home/pi/raspberrypilidar/CMakeFiles/picamdemo.dir
