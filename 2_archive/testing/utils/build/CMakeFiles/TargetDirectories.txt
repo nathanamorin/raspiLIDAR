@@ -1,0 +1,2 @@
+/home/pi/raspberrypilidar/testing/utils/build/CMakeFiles/raspicam_still_test.dir
+/home/pi/raspberrypilidar/testing/utils/build/CMakeFiles/raspicam_test.dir
