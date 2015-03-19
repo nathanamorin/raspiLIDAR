@@ -1,1 +1,0 @@
-/home/pi/raspberrypilidar/testing2/build/CMakeFiles/simpletest_raspicam.dir

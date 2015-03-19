@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/raspicam_test.dir/raspicam_test.o  -o raspicam_test -rdynamic -lProject 

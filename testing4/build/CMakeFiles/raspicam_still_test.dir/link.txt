@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/raspicam_still_test.dir/raspicam_still_test.cpp.o  -o raspicam_still_test -rdynamic -lProject 
