@@ -1,0 +1,1 @@
+/usr/bin/c++     “-lpthread” CMakeFiles/raspicam_test.dir/raspicam_test.o  -o raspicam_test -rdynamic -lProject 
