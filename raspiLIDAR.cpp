@@ -8,7 +8,9 @@ Attributions: Ava group of the University of Cordoba (see ATTRIBUTIONS for fill 
 */
 
 #include "raspiLIDAR.h"
+#include <vector>;
 using namespace std;
+using std::vector;
 size_t nFramesCaptured = 30;
 
 int main(){
@@ -48,16 +50,54 @@ int main(){
 		Camera.grab();
 		Camera.retrieve(data);
 	}
+	int width = Camera.getWidth();
+	int height = Camera.getHeight();
+	int currentPos;
+	cout << "test" << endl;
+	//RGB_pixel image = new RGB_pixel [height][width];
+	vector<vector<RGB_pixel> > image;
+	cout << "starting analysis" << endl;
 	
-	// for (int e=0;e<100;e++)
-	// {
-	// 	cout << (int)(data[e]) << endl;
-	// }
+
+	for (int y=0; y<height; y++)
+	{
+		//if (y % 10 == 0) cout << y << endl;
+		image.resize(height);
+		for (int x=0; x<width; x++)
+		{
+			//if (x % 10 == 0) cout << x << endl;
+			image[y].resize(width);
+			currentPos = (y*width + x)*3;
+			image[y][x].R = data[currentPos];
+			image[y][x].G = data[currentPos+1];
+			image[y][x].B = data[currentPos+2];
+		}
+	}
+	cout << "done rendering image"<<endl;
+	int x_avg = 0, numPoints = 0;
+	for (int y=0; y<height; y++)
+	{
+		for (int x=0; x<width; x++)
+		{
+			if (image[y][x].R > 100 && image[y][x].G > 100)
+			{
+				cout << x<<endl;
+				x_avg += x;
+				numPoints++;
+			}
+			
+		}
+	}
+
+	x_avg /= numPoints;
+
+	cout << "Average x :: " << x_avg << "Height :: " << height << "Width :: " << width << endl;
+
+
 
 	saveImage(imageFilename, data, Camera);
 
 	cout << Camera.getImageBufferSize() <<endl;
-
 	Camera.release();
 
 }
