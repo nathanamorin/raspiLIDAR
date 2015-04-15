@@ -13,14 +13,6 @@ Created for CNIT 315 Purdue University as part of an honors project
 #include "raspicam.h"
 using namespace std;
 
-
-#ifndef SUCCESS
-#define SUCCESS 0
-#endif
-
-#ifndef FAILURE
-#define FAILURE 1
-#endif
 /*
 Define data structure for RGB pixel 
 */
@@ -35,13 +27,6 @@ struct pixel_point{
 	int x;
 	int y;
 };
-
-
-int calculateDistance(double point, double *dist);
-
-int findPoints(raspicam::RaspiCam Camera, unsigned char *data, double *avg);
-
-int captureImage(raspicam::RaspiCam Camera, unsigned char **data);
 
 /*
 Sets up camera settings before image is taken
