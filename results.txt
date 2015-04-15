@@ -16,3 +16,9 @@ done rendering image
 1014
 Average x :: 1014Height :: 960Width :: 1280
 3686400
+
+
+RESULT CALC
+c/x = d
+
+c = 0.0551 pixel * cm
