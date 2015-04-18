@@ -37,7 +37,7 @@ struct pixel_point{
 };
 
 
-int calculateDistance(double point, double *dist);
+int calculateVars(double point);
 
 int findPoints(int width, int height, unsigned char *data, double *x_avg);
 

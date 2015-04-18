@@ -15,10 +15,8 @@ using namespace std;
 using std::vector;
 size_t nFramesCaptured = 30;
 
-const double rpc  = 0.0006;
-const double ro  = 0.03165;
-// const double rpc  = 0.4896;
-// const double ro  = 0.1419;
+double rpc  = 0.0006;
+double ro  = 0.0299;
 const double h = .15;
 const double x_center = 640;
 
@@ -139,51 +137,67 @@ int findPoints(int width, int height, unsigned char *data, double *x_avg)
 	return SUCCESS;
 }
 
-int calculateDistance(double point, double *dist)
+int calculateVars(double point, double distance)
 {
-	double thea = (point-x_center) * rpc + ro;
+	double b_dist_current = 0;
+	double b_dist_best = 0;
+	double b_rpc_current = 0;
+	double b_rpc_best = 0;
+	double b_ro_current = 0;
+	double b_ro_best = 0;
 
-	*dist = h / tan(thea);
+	cout << "Given Distance " << distance << endl;
+
+	for (double a=-100; a<100; a++)
+	{
+		b_rpc_current = a/100000 + rpc;
+		for (double b=-100; b<100; b++)
+		{
+			b_ro_current = b/100000 + ro;
+			b_dist_current = h / tan( (point-x_center) * b_rpc_current + b_ro_current);
+			double current_dist = fabs (distance - b_dist_current);
+			double best_dist = fabs (distance - b_dist_best);
+			if (b_dist_current>0 && b_rpc_current > 0 && b_ro_current > 0 && ( current_dist < best_dist ) )
+			{
+				//	cout << distance << " - " << b_dist_current << " - " << b_dist_best << endl;
+				b_rpc_best = b_rpc_current;
+				b_ro_best = b_ro_current;
+				b_dist_best = b_dist_current;
+			}
+
+		}
+
+	}
+	cout << "Best Distance" << b_dist_best << endl;
+	rpc = b_rpc_best;
+	ro = b_ro_best;
 
 	return SUCCESS;
 }
 
 int executeLIDAR(raspicam::RaspiCam &Camera)
 {
-		//Set Filename for future file output
-	time_t rawtime;
-	time(&rawtime);
-	string imageFilename("images/image_test_");
-	imageFilename += ctime(&rawtime);
-	imageFilename += ".ppm";
-	strReplace(&imageFilename," ","_");
 
 
 	unsigned char *data;
 
+	cout << "Distance :: " << endl;
+	double distance;
+	cin >> distance;
+
 	//Capture Image
-	clock_t t = clock();
 	if (captureImage(Camera, &data)) return FAILURE;
-	clock_t captureTime = clock() - t;
 
 	//Find Laser Points
 	double x_avg = 0;
-	t = clock();
 	findPoints(Camera.getWidth(), Camera.getHeight(), data, &x_avg);
-	clock_t imageProcessingTime = clock() - t;
 
 	//Calculate Distance from points
-	double dist = 0;
-	t = clock();
-	calculateDistance(x_avg, &dist);
-	clock_t distanceCalculationTime = clock() - t;
+	calculateVars(x_avg, distance);
 
-	cout << "Distance to point -- " << dist << endl;
+	cout << "RPC = " << rpc << "RO = " << ro << endl;
 
-	cout << "Cature Time \t Image Processing Time \t Calculation Time \n" <<
-					((float)captureTime)/CLOCKS_PER_SEC << "\t\t" <<
-					((float)imageProcessingTime)/CLOCKS_PER_SEC << "\t\t" <<
-					((float)distanceCalculationTime)/CLOCKS_PER_SEC << "\t" << endl;
+
 
 	if (data)
 	{
