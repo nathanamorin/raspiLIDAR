@@ -25,9 +25,9 @@ The objective of this project is to complete at least Milestone 1 of the project
 
 **Milestones:**		
 		
-Milestone 1.1 - Design the camera / laser system and algorithm to accurately measure a single point distance.		
+Milestone 1.1(accomplished) - Design the camera / laser system and algorithm to accurately measure a single point distance.		
 
-Milestone 1.2 - Modify system to calculate point distances in a line using the full line produced by line laser module with a single camera frame.
+Milestone 1.2(accomplished) - Modify system to calculate point distances in a line using the full line produced by line laser module with a single camera frame.
 
 Milestone 2 - Add motor microcontroller to the system allowing camera / laser to be rotated and multiple point-line measurements to be made in a ~180 degree radius.
 
