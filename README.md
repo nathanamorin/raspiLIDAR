@@ -2,6 +2,9 @@
 
 This project is created with the goal of designing a low cost LIDAR system using a Raspberry Pi and off the shelf components.  It was created as part of an **Honors Project for CNIT 315 at Purdue University**.  More information about the project is below.
 
+**Report:**
+https://docs.google.com/document/d/1UuPHQSzI0220OTjrGCOZow7oYjg9ERSWi7uEdPrIQg0/pub
+
 
 **Goal:**
 
