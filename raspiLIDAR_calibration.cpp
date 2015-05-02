@@ -7,7 +7,7 @@ Created for CNIT 315 Purdue University as part of an honors project
 Attributions: Ava group of the University of Cordoba (see ATTRIBUTIONS for fill citation)
 */
 
-#include "raspiLIDAR.h"
+#include "raspiLIDAR_calibration.h"
 #include <vector>
 #include <math.h>
 
@@ -88,7 +88,7 @@ int main(){
 		{
 			if (image[y][x].R > 100 && image[y][x].G > 100)
 			{
-				cout << x<<endl;
+				//cout << x<<endl;
 				x_avg += x;
 				numPoints++;
 			}
